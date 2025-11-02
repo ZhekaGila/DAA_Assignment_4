@@ -1,8 +1,10 @@
+import graph.scc.Kosaraju;
+import graph.topo.Kahn;
 import io.JsonReader;
 import metrics.PerfomanceTracker;
 import model.Graph;
-import model.CondensationGraph;
-import algorithms.*;
+import graph.scc.CondensationGraph;
+
 import java.util.List;
 
 public class Main {

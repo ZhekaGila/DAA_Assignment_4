@@ -1,4 +1,7 @@
-package model;
+package graph.scc;
+
+import model.Edge;
+import model.Graph;
 
 import java.util.*;
 

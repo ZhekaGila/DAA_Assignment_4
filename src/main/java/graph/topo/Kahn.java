@@ -1,7 +1,7 @@
-package algorithms;
+package graph.topo;
 
 import metrics.PerfomanceTracker;
-import model.CondensationGraph;
+import graph.scc.CondensationGraph;
 import java.util.*;
 
 

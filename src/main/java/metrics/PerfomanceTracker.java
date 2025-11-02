@@ -6,6 +6,7 @@ public class PerfomanceTracker {
     private int dfsEdges  = 0;
     private int stackPushes  = 0;
     private int stackPops  = 0;
+    private int relaxations = 0;
     private int operations = 0;
     private long executionTime = 0;
 
@@ -45,13 +46,19 @@ public class PerfomanceTracker {
         this.stackPops++;
         incOperations();
     }
+    public void incRelaxations() {
+        this.relaxations++;
+        incOperations();
+    }
 
     public long getExecutionTime() {return executionTime;}
     public int getDFSVisits() {return dfsVisits;}
     public int getDFSEdges() {return dfsEdges;}
     public int getStackPushes() {return stackPushes;}
     public int getStackPops() {return stackPops;}
+    public int getRelaxations() {return relaxations;}
     public int getOperations() {return operations;}
+
 
 
     public void reset(){

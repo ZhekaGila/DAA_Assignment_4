@@ -1,4 +1,4 @@
-package algorithms;
+package graph.scc;
 
 import metrics.PerfomanceTracker;
 import model.*;
