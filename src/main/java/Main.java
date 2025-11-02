@@ -1,6 +1,7 @@
 import io.JsonReader;
 import metrics.PerfomanceTracker;
 import model.Graph;
+import model.CondensationGraph;
 import algorithms.Kosaraju;
 import java.util.List;
 
@@ -19,11 +20,9 @@ public class Main {
             System.out.println("SCC: " + component + ", size=" + component.size());
         }
 
-        System.out.println("dfsVisits: " + kosaTracker.getDFSVisits());
-        System.out.println("dfsEdges: " + kosaTracker.getDFSEdges());
-        System.out.println("stackPushes: " + kosaTracker.getStackPushes());
-        System.out.println("stackPops: " + kosaTracker.getStackPops());
-        System.out.println("operations: " + kosaTracker.getOperations());
-        System.out.println("executionTime: " + kosaTracker.getExecutionTime() + " Ns");
+        CondensationGraph condGraph = new CondensationGraph(graph, sccList);
+
+        System.out.println(condGraph);
+
     }
 }

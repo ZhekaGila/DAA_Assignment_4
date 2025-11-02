@@ -54,7 +54,7 @@ public class Kosaraju {
             int from = e.getFrom();
             int to = e.getTo();
 
-            transposed.get(from).add(to);
+            transposed.get(to).add(from);
         }
 
         return transposed;
