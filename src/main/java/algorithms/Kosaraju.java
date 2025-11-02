@@ -1,5 +1,6 @@
 package algorithms;
 
+import metrics.PerfomanceTracker;
 import model.*;
 import java.util.*;
 
@@ -9,13 +10,14 @@ public class Kosaraju {
     private boolean[] visited;
     private Deque<Integer> stack;
     private List<List<Integer>> sccList;
+    private PerfomanceTracker tracker;
 
-
-    public Kosaraju(Graph graph) {
+    public Kosaraju(Graph graph, PerfomanceTracker tracker) {
         this.graph = graph;
         this.visited = new boolean[graph.getNodeCount()];
         this.stack = new ArrayDeque<>();
         this.sccList = new ArrayList<>();
+        this.tracker = tracker;
     }
 
     public void firstDfs(){
@@ -29,13 +31,17 @@ public class Kosaraju {
 
     private void dfs(int v){
         visited[v] = true;
+        tracker.incDFSVisits();
+
         for(Edge e: graph.getAdjacency().get(v)){
+            tracker.incDFSEdges();
             int u = e.getTo();
             if(!visited[u]){
                 dfs(u);
             }
         }
         stack.push(v);
+        tracker.incStackPushes();
     }
 
     private Map<Integer, List<Integer>> transpose() {
@@ -57,9 +63,11 @@ public class Kosaraju {
 
     private void secondDfs(int v, List<Integer> component, Map<Integer, List<Integer>> transposedAdj){
         visited[v] = true;
+        tracker.incDFSVisits();
         component.add(v);
 
         for(int u: transposedAdj.get(v)){
+            tracker.incDFSEdges();
             if(!visited[u]){
                 secondDfs(u, component, transposedAdj);
             }
@@ -68,6 +76,8 @@ public class Kosaraju {
 
 
     private void findSccList(){
+        tracker.reset();
+        tracker.startTimer();
 
         firstDfs();
 
@@ -76,6 +86,7 @@ public class Kosaraju {
         Arrays.fill(visited,false);
 
         while(!stack.isEmpty()){
+            tracker.incStackPops();
             int v = stack.pop();
             if(!visited[v]){
                 List<Integer> component = new ArrayList<>();
@@ -83,6 +94,8 @@ public class Kosaraju {
                 sccList.add(component);
             }
         }
+
+        tracker.stopTimer();
     }
 
     public List<List<Integer>> getScc(){

@@ -1,4 +1,5 @@
 import io.JsonReader;
+import metrics.PerfomanceTracker;
 import model.Graph;
 import algorithms.Kosaraju;
 import java.util.List;
@@ -8,8 +9,9 @@ public class Main {
         String path = "src/main/resources/tasks.json";
 
         Graph graph = JsonReader.readGraphFromJson(path);
+        PerfomanceTracker kosaTracker = new PerfomanceTracker();
 
-        Kosaraju kosaraju = new Kosaraju(graph);
+        Kosaraju kosaraju = new Kosaraju(graph, kosaTracker);
 
         List<List<Integer>> sccList = kosaraju.getScc();
 
@@ -17,5 +19,11 @@ public class Main {
             System.out.println("SCC: " + component + ", size=" + component.size());
         }
 
+        System.out.println("dfsVisits: " + kosaTracker.getDFSVisits());
+        System.out.println("dfsEdges: " + kosaTracker.getDFSEdges());
+        System.out.println("stackPushes: " + kosaTracker.getStackPushes());
+        System.out.println("stackPops: " + kosaTracker.getStackPops());
+        System.out.println("operations: " + kosaTracker.getOperations());
+        System.out.println("executionTime: " + kosaTracker.getExecutionTime() + " Ns");
     }
 }
