@@ -51,6 +51,7 @@ public class Kosaraju {
         }
 
         for (Edge e : graph.getEdges()) {
+            tracker.incOperations();
             int from = e.getFrom();
             int to = e.getTo();
 

@@ -11,6 +11,7 @@ public class Main {
 
         Graph graph = JsonReader.readGraphFromJson(path);
         PerfomanceTracker kosaTracker = new PerfomanceTracker();
+        PerfomanceTracker kahnTracker = new PerfomanceTracker();
 
         Kosaraju kosaraju = new Kosaraju(graph, kosaTracker);
 
@@ -22,7 +23,7 @@ public class Main {
 
         CondensationGraph condGraph = new CondensationGraph(graph, sccList);
 
-        Kahn sorter = new Kahn(condGraph);
+        Kahn sorter = new Kahn(condGraph, kahnTracker);
         sorter.printTopologicalOrder();
 
     }

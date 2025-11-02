@@ -1,5 +1,6 @@
 package algorithms;
 
+import metrics.PerfomanceTracker;
 import model.CondensationGraph;
 import java.util.*;
 
@@ -8,14 +9,19 @@ public class Kahn {
     private CondensationGraph condensation;
     private Map<Integer, Set<Integer>> dag;
     private List<List<Integer>> sccList;
+    private PerfomanceTracker tracker;
 
-    public Kahn(CondensationGraph condensation){
+    public Kahn(CondensationGraph condensation, PerfomanceTracker tracker){
         this.condensation = condensation;
         this.dag = condensation.getDag();
         this.sccList = condensation.getSccList();
+        this.tracker = tracker;
     }
 
     public List<Integer> sort(){
+        tracker.reset();
+        tracker.startTimer();
+
         Map<Integer, Integer> inDegree = new HashMap<>();
 
         for(Integer node: dag.keySet()){
@@ -25,6 +31,7 @@ public class Kahn {
         for(Set<Integer> neighbors: dag.values()){
             for(Integer neighbor : neighbors){
                 inDegree.put(neighbor, inDegree.getOrDefault(neighbor,0) + 1);
+                tracker.incOperations();
             }
         }
 
@@ -32,6 +39,7 @@ public class Kahn {
         for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) {
                 queue.add(entry.getKey());
+                tracker.incStackPushes();
             }
         }
 
@@ -39,10 +47,12 @@ public class Kahn {
 
         while (!queue.isEmpty()) {
             int node = queue.poll();
+            tracker.incStackPops();
             topoOrder.add(node);
 
             for (int neighbor : dag.getOrDefault(node, Collections.emptySet())) {
                 inDegree.put(neighbor, inDegree.get(neighbor) - 1);
+                tracker.incOperations();
                 if (inDegree.get(neighbor) == 0) {
                     queue.add(neighbor);
                 }
@@ -52,6 +62,8 @@ public class Kahn {
         if (topoOrder.size() != dag.size()) {
             System.out.println("Graph has cycle! We can't order it");
         }
+
+        tracker.stopTimer();
 
         return topoOrder;
     }
