@@ -60,7 +60,7 @@ public class Kahn {
         }
 
         if (topoOrder.size() != dag.size()) {
-            System.out.println("Graph has cycle! We can't order it");
+            System.out.println("Graph has cycle, We can't order it");
         }
 
         tracker.stopTimer();

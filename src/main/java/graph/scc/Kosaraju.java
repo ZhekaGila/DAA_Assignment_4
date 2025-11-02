@@ -44,6 +44,7 @@ public class Kosaraju {
         tracker.incStackPushes();
     }
 
+
     private Map<Integer, List<Integer>> transpose() {
         Map<Integer, List<Integer>> transposed = new HashMap<>();
         for (int i = 0; i < graph.getNodeCount(); i++) {
@@ -74,7 +75,6 @@ public class Kosaraju {
             }
         }
     }
-
 
     private void findSccList(){
         tracker.reset();

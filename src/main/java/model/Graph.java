@@ -28,8 +28,12 @@ public class Graph {
             adjacency.put(i, new ArrayList<>());
         }
         for (Edge e : edges) {
+            if (!adjacency.containsKey(e.getFrom())) {
+                adjacency.put(e.getFrom(), new ArrayList<>());
+            }
             adjacency.get(e.getFrom()).add(e);
         }
+
     }
 
     public int getNodeCount() { return nodeCount; }

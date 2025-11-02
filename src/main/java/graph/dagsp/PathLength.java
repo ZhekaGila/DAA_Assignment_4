@@ -84,31 +84,4 @@ public class PathLength {
         tracker.stopTimer();
         return distance;
     }
-
-    public List<Integer> reconstructPath(int targetScc) {
-        List<Integer> path = new ArrayList<>();
-        int current  = targetScc;
-        while (current  != -1) {
-            path.add(current );
-            current  = previousScc[current];
-        }
-        Collections.reverse(path);
-        return path;
-    }
-
-    public Map<Integer, Integer> getCompDuration() {
-        return compDuration;
-    }
-
-    public List<Integer> getTopoOrder() {
-        return topoOrder;
-    }
-
-    public Map<Integer, Set<Integer>> getDag() {
-        return dag;
-    }
-
-    public List<List<Integer>> getSccList() {
-        return sccList;
-    }
 }
