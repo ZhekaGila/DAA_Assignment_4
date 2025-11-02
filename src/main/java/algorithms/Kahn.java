@@ -70,7 +70,11 @@ public class Kahn {
 
     public void printTopologicalOrder() {
         List<Integer> topoOrder = sort();
-        System.out.println("Topological order of SCC components and original tasks:");
+        System.out.println("Topological order:");
+        for (Integer node: topoOrder) {
+            System.out.print(node + " ");
+        }
+        System.out.println();
         for (int comp : topoOrder) {
             System.out.println("Component " + comp + " -> " + sccList.get(comp));
         }

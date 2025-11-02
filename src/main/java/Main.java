@@ -20,6 +20,7 @@ public class Main {
         for (List<Integer> component : sccList) {
             System.out.println("SCC: " + component + ", size=" + component.size());
         }
+        System.out.println();
 
         CondensationGraph condGraph = new CondensationGraph(graph, sccList);
 
