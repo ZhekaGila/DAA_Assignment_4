@@ -1,4 +1,4 @@
-package org.example.metrics;
+package metrics;
 
 public class PerfomanceTracker {
 
