@@ -2,7 +2,7 @@ import io.JsonReader;
 import metrics.PerfomanceTracker;
 import model.Graph;
 import model.CondensationGraph;
-import algorithms.Kosaraju;
+import algorithms.*;
 import java.util.List;
 
 public class Main {
@@ -22,7 +22,8 @@ public class Main {
 
         CondensationGraph condGraph = new CondensationGraph(graph, sccList);
 
-        System.out.println(condGraph);
+        Kahn sorter = new Kahn(condGraph);
+        sorter.printTopologicalOrder();
 
     }
 }

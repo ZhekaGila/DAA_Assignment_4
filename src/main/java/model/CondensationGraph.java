@@ -36,6 +36,11 @@ public class CondensationGraph {
         return dag;
     }
 
+    public List<List<Integer>> getSccList() {
+        return sccList;
+    }
+
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
